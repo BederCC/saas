@@ -6,6 +6,20 @@ $primary-text-color:#7C6A0A;
 $font-stackl: 'IBM Plex Sans' , sans-serif;
 $pharagraph-size: 1.5em;
 
+@mixin flex-center($direction, $content, $align) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $content;
+    align-items: $align;
+}
+
+@mixin buttonStyle {
+    button{
+        background-color: $primary-color;
+        border-style: none;
+    }
+}
+
 body{
     margin: 0px;
     padding: 0px;
@@ -15,8 +29,7 @@ body{
 
 nav {
     width: auto;
-    display: flex;
-    justify-content: space-between;
+    @include flex-center(row, space-between, center);
     color: $primary-text-color;
     padding: 15px;
     p{
@@ -25,23 +38,18 @@ nav {
     }
     .icons{
         display: flex;
-        padding-right: 30px;
+
         gap: 20px;
-        button{
-            background-color: $primary-color;
-            border-style: none;
-        }
+        @include buttonStyle();
     }
 }
 
 article {
     width: auto;
     color: $primary-text-color;
+    @include flex-center(row, space-around, center);
     padding-left: 50px;
     padding-right: 50px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
 
     .impact-section{
         width: 50%;
@@ -103,12 +111,12 @@ section {
         }
 
         .card-section{
-            display: flex;
+
             width: auto;
             height: auto;
-            justify-content: center;
+            @include flex-center(row, center, center);
             flex-wrap: wrap;
-            align-items: center;
+
             column-gap: 80px;
             row-gap: 80px;
             flex-wrap: wrap;
@@ -161,9 +169,82 @@ section {
     }
 }
 
+.about-us {
+    padding-bottom: 60px;
+    h2{
+        font-weight: bold !important;
+        padding-bottom: 60px;
+    }
+    .mission-section{
+        @include flex-center(row, space-evenly, center);
+        align-items: center;
+        .earth{
+            width: 40%;
+            display: flex;
+            gap: 30px;
+            color: orange;
+            p{
+                font-size: $pharagraph-size;
+            }
+            img{
+                width: 20vw;
+                height: 30vh;
+                object-fit: cover;
+            }
+        }
+
+       .innovation{
+            @extend.earth;
+        }
+       }
+    }
+
+.gallery {
+    .gallery-images{
+        @include flex-center(row, space-between, center);
+        img{
+            width: 25vw;
+            height: 35vh;
+            object-fit: cover;
+            object-position: 5px 35%;
+            border-radius: 15px;
+            &:hover{
+                transform: scale(1.05);
+                transition: all 0.5s ease-in-out;
+            }
+        }
+    }
+}
+
+.location {
+    color: orange;
+    h2{
+        font-weight: bold!important;
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+    .map{
+        @include flex-center(row, center, center);
+    }
+    p{
+        font-size: $pharagraph-size;
+    }
+}
+
 .footer {
-    $background: #fa9500;
-    background-color: $background;
+    background-color: $quaternary-color;
     width: 100%;
-    height: 100px;
+    height: auto;
+    padding: 40px;
+    color: white;
+    font-weight: 30;
+    .social-media{
+        @include flex-center(row, center, center);
+        align-items: center;
+        gap: 20px;
+       .social-icons{
+            display: flex;
+            @include buttonStyle();
+        }
+    }
 }
